@@ -1,0 +1,3 @@
+[submodule "AXI4-Interconnect"]
+	path = AXI4-Interconnect
+	url = git@github.com:atfox272/AXI4-Interconnect.git
