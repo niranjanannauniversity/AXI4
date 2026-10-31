@@ -1,4 +1,3 @@
-import axi_pkg::*;
 
 class axi_wr_tx #(
     parameter int ADDR_W     =  axi_pkg::DEFAULT_ADDR_WIDTH             ,    
@@ -22,17 +21,17 @@ class axi_wr_tx #(
     rand bit [DATA_W-1:0]  wdata[];
 
     //Control knob to select which slave
-    rand bit target_slave_id = 0;
+    rand bit [SLAVE_AMT-1:0] target_slave_id;
 
 
     //CONSTRAINTS
     
     //Fixing only the slave instance as per the number of slaves 
     constraint slave_id { 
-        target_slave_id < SLV_AMT ; 
-        awaddr[ADDR_W-1 : ADDR_W - $clog2(SLV_AMT)] == target_slave_id;
+        target_slave_id < SLAVE_AMT ; 
+        awaddr[ADDR_W-1 : ADDR_W - $clog2(SLAVE_AMT)] == target_slave_id;
     }
-   i
+ 
     //wdata size is number of beats
     constraint beat_times { wdata.size() == awlen+1 ;}
 
@@ -42,7 +41,5 @@ class axi_wr_tx #(
     //4 bytes transfer as per data width
     constraint beat_size { awsize == $clog2(DATA_W / 8) ; }
 
-    //For now only 8 beats in a transaction is maintained
-    constraint no_of_beats { awlen inside {[0:7]} ; }
 
 endclass
