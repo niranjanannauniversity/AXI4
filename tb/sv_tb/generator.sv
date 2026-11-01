@@ -3,7 +3,7 @@ import axi_pkg :: *;
 class axi_wr_gr;
 
     
-    mailbox #(axi_wr_tr) mbxgd;
+    mailbox #(axi_wr_tx) mbxgd;
     mailbox #(bit)       mbxscogen;
 
 
@@ -28,7 +28,7 @@ class axi_wr_gr;
 
 
 
-    function new(mailbox #(axi_wr_tr) mbxgd, mbxscogen); 
+    function new(mailbox #(axi_wr_tx) mbxgd, mbxscogen); 
     
         this.mbxgd = mbxgd;
         this.mbxscogen = mbxscogen;
