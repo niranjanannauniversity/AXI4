@@ -24,6 +24,9 @@ package axi_pkg;
     // Dispatcher DATA depth configuration
     parameter                               int DEFAULT_DSP_RDATA_DEPTH     = 16;
 
-    //Including the transaction class, so just importing the axi_pkg will have the transaction class also
+    //Including all the classes
     `include "transaction.sv"
+    `include "generator.sv"
+
+         
 endpackage

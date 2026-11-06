@@ -20,16 +20,17 @@ class axi_wr_tx #(
     //W channel - with dynamic array for beats to be accomodated.
     rand bit [DATA_W-1:0]  wdata[];
 
-    //Control knob to select which slave
-    rand bit [SLAVE_AMT-1:0] target_slave_id;
+    //Helpers 
+    rand bit [SLAVE_BIT-1:0] target_slave_id;                 //Control knob to select which slave
+    int mst_id;                                               //This says which master is transmitting from the master side to the scoreboard, so the scoreboard can assert this with the received s_AWID_o
 
 
     //CONSTRAINTS
     
     //Fixing only the slave instance as per the number of slaves 
     constraint slave_id { 
-        target_slave_id < SLAVE_AMT ; 
-        awaddr[ADDR_W-1 : ADDR_W - $clog2(SLAVE_AMT)] == target_slave_id;
+        target_slave_id < SLAVE_BIT ; 
+        awaddr[ADDR_W-1 : ADDR_W - $clog2(SLAVE_BIT)] == target_slave_id;
     }
  
     //wdata size is number of beats

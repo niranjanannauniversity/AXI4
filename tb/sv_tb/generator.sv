@@ -1,4 +1,4 @@
-import axi_pkg :: *;
+
 
 class axi_wr_gr;
 
@@ -14,13 +14,13 @@ class axi_wr_gr;
 
     task run();
         axi_wr_tx tr;
-        for (integer i = 0 ; i < count ; i++)begin
+        for (int i = 0 ; i < count ; i++)begin
             tr = new();
-            assert(tr.randomize()) else $display("[GEN] Randomisation Failed");
+            assert(tr.randomize()) else $error("[GEN] Randomisation Failed");
             $display("[GEN] awaddr : %0h  awid : %0d awburst : %0d awlen : %0d awsize : %0d  wdata : %0p ", tr.awaddr, tr.awid , tr.awburst , tr.awlen , tr.awsize , tr.wdata);
             
             mbxgd.put(tr);
-            mbxscogen.get(ack); 
+            mbxscogen.get(ack); // This is just for the bringup test, this has to be removed when there are more masters transmitting. As this will block the transaction and there will be no contention, but the DUT gives this privilege 
         end
         -> done;        
     endtask
