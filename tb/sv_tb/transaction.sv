@@ -29,8 +29,8 @@ class axi_wr_tx #(
     
     //Fixing only the slave instance as per the number of slaves 
     constraint slave_id { 
-        target_slave_id < SLAVE_BIT ; 
-        awaddr[ADDR_W-1 : ADDR_W - $clog2(SLAVE_BIT)] == target_slave_id;
+        target_slave_id < SLAVE_AMT ; 
+        awaddr[ADDR_W-1 : SLAVE_BIT] == target_slave_id;
     }
  
     //wdata size is number of beats
