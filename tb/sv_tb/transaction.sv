@@ -44,3 +44,14 @@ class axi_wr_tx #(
 
 
 endclass
+
+//Master side monitor, needs this response class to the scoreboard
+class axi_wr_resp #(
+    parameter int ID_W       =  axi_pkg::DEFAULT_TRANS_MST_ID_W         ,
+    parameter int RESP_W     =  axi_pkg::DEFAULT_TRANS_WR_RESP_W
+);
+    int                 mst_id; 
+    bit [ID_W-1:0]      bid;
+    bit [RESP_W-1:0]    bresp;
+
+endclass
